@@ -17,7 +17,7 @@ class App extends Component {
 
   componentDidMount() {
     axios
-      .get(`http://api.giphy.com/v1/gifs/search?q=${this.state.q}&api_key=${process.env.API_KEY}`)
+      .get(`http://api.giphy.com/v1/gifs/search?q=${this.state.q}&api_key=${process.env.API_KEY}&limit=${this.state.limit}`)
       .then((response) => {
         console.log(response);
         this.setState({ result: response.data });
