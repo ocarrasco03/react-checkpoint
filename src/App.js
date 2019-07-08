@@ -13,16 +13,17 @@ class App extends Component {
 			q: '',
       limit: 20,
       loading: false,
-      timeOut: 0,
+      timeOut: null,
 			result: []
     };
     this.isLoading = false;
+    this.API_KEY = 'Ij3bLFgqaqeq5ZPeyCzmkGgEH55yONE3';
 	}
 
 	componentDidMount() {
 		axios
 			.get(
-				`http://api.giphy.com/v1/gifs/search?q=${this.state.q}&api_key=Ij3bLFgqaqeq5ZPeyCzmkGgEH55yONE3&limit=${this.state
+				`http://api.giphy.com/v1/gifs/search?q=${this.state.q}&api_key=&limit=${this.state
 					.limit}`
 			)
 			.then((response) => {
@@ -30,17 +31,15 @@ class App extends Component {
 				this.setState({ result: response.data });
 			})
 			.catch((e) => console.log(`Unable to fetch data: ${e}`));
-	}
-
-	updateState = (field) => (event) => {
-		this.setState({
-			[field]: event.target.value
-		});
-  };
+  }
   
   searchGif = (event) => {
     this.state({ loading: true });
-    this.timeOut = setTimeout(() =>);
+    clearTimeout(this.timeOut);
+    let val = event.target.value;
+    this.timeOut = setTimeout(() => {
+      this.requestAPI(val);
+    }, 500);
   }
 
 	render() {
@@ -49,7 +48,7 @@ class App extends Component {
 			<React.Fragment>
 				<Grid container justify="center" spacing={2}>
 					<Grid item xs={8}>
-						<SearchForm q={this.state.q} updateState={this.updateState} />
+						<SearchForm q={this.state.q} searchGif={this.searchGif}/>
 					</Grid>
 				</Grid>
 			</React.Fragment>

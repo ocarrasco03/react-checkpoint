@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, TextField, Button } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
-const SearchForm = ({ q, updateState }) => {
+const SearchForm = ({ q, searchGif }) => {
 	return (
 		<React.Fragment>
 			<Grid item xs={12}>
@@ -12,7 +12,7 @@ const SearchForm = ({ q, updateState }) => {
 					margin="normal"
 					fullWidth
 					value={q}
-					onChange={updateState('q')}
+					onChange={searchGif('q')}
 				/>
                 <Button><SearchIcon /></Button>
 			</Grid>
